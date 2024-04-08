@@ -6,13 +6,15 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/session"
 
 	"github.com/gofiber/template/html/v2"
 )
 
 func main() {
-	genRandomUsers()
+	// genRandomUsers()
+
 	// Initialize the HTML template engine
 
 	// Create the HTML template engine
@@ -23,17 +25,19 @@ func main() {
 		Views: engine,
 	})
 
+	app.Use(logger.New())
+
 	// Setup session middleware
 	store := session.New(session.Config{
 		Expiration: 4 * time.Hour,
 	})
 
+	app.Static("/", "./public")
+
 	// Route for serving the login page
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("login", fiber.Map{})
 	})
-
-	app.Static("/", "/public")
 
 	// Route for handling the login logic
 	app.Post("/login", func(c *fiber.Ctx) error {
