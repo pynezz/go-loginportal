@@ -13,10 +13,6 @@ import (
 )
 
 func main() {
-	// genRandomUsers()
-
-	// Initialize the HTML template engine
-
 	// Create the HTML template engine
 	engine := html.New("./views", ".html")
 
@@ -44,8 +40,7 @@ func main() {
 		username := c.FormValue("username")
 		password := c.FormValue("password")
 
-		// Hardcoded credentials for simplicity
-		if username == "admin" && password == "password" {
+		if user := getUser(username); user.Password == password {
 			sess, err := store.Get(c)
 			if err != nil {
 				return err
@@ -74,7 +69,7 @@ func main() {
 		return c.Redirect("/", fiber.StatusFound)
 	})
 
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(":30000"))
 }
 
 func genRandomUsers() {
