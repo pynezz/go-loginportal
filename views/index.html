@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+    <link href="/styles.css" rel="stylesheet">
+    <script src="/js/htmx.js"></script>
+
+</head>
+<body>
+    <h1>{{.Title}}</h1>
+
+    <button hx-get="/login" hx-target="#content">Login</button>
+    <div id="content"></div>
+
+    <script src="https://unpkg.com/htmx.org"></script>
+
+</body>
+</html>
