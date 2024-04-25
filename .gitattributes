@@ -1,2 +1,2 @@
 special-vendored-path/* linguist-vendored
-/public/js/htmx.js linguist-vendored=false
+public/js/htmx.js linguist-vendored=false
