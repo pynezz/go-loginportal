@@ -1,2 +1,4 @@
 public/js/htmx.js linguist-vendored 
-public/styles.css linguist-vendored # Tailwind
+
+# Tailwind
+public/styles.css linguist-vendored 
