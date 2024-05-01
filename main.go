@@ -69,7 +69,14 @@ func main() {
 		return c.Redirect("/", fiber.StatusFound)
 	})
 
+	// Detect goloris attacks
+	app.Post("*", func(c *fiber.Ctx) error {
+		detectAnomalousBehaviour(c)
+	})
+
 	log.Fatal(app.Listen(":30000"))
+
+	return
 }
 
 func genRandomUsers() {
