@@ -71,12 +71,11 @@ func main() {
 
 	// Detect goloris attacks
 	app.Post("*", func(c *fiber.Ctx) error {
-		detectAnomalousBehaviour(c)
+		status := detectAnomalousBehaviour(c)
+		return c.SendStatus(status)
 	})
 
 	log.Fatal(app.Listen(":30000"))
-
-	return
 }
 
 func genRandomUsers() {

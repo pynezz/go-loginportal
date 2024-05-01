@@ -16,7 +16,7 @@ type Client struct {
 
 var clients map[string]*Client
 
-func detectAnomalousBehaviour(c *fiber.Ctx) {
+func detectAnomalousBehaviour(c *fiber.Ctx) int {
 
 	if clients[c.IP()] == nil {
 		clients[c.IP()] = &Client{
@@ -39,7 +39,8 @@ func detectAnomalousBehaviour(c *fiber.Ctx) {
 				" bytes. Closing connection." +
 				"")
 
-		c.SendStatus(444) // A special nginx status code that closes the connection
+		return 444
 	}
 
+	return 200
 }
