@@ -25,13 +25,12 @@ func detectAnomalousBehaviour(c *fiber.Ctx) int {
 			UserAgent:         c.Get("User-Agent"),
 			BodyBytesSent:     len(c.Request().Body()),
 		}
-
 	} else {
 		clients[c.IP()].ActiveConnections++
 		clients[c.IP()].BodyBytesSent += len(c.Request().Body())
 	}
 
-	if clients[c.IP()].ActiveConnections > 10 && clients[c.IP()].BodyBytesSent > 1000000 {
+	if clients[c.IP()].ActiveConnections > 10 || clients[c.IP()].BodyBytesSent > 1000000 {
 		log.Printf(
 			"Anomalous behaviour detected from IP: " + c.IP() +
 				" with User-Agent: " + c.Get("User-Agent") +
